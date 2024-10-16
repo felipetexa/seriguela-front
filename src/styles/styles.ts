@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components";
 
 export const Styles = createGlobalStyle`
 
-    @font-face {
+    /* @font-face {
         font-family: "Motiva Sans Light";
         src: url("/fonts/Motiva-Sans-Light.ttf") format("truetype");
         font-style: normal;
@@ -12,13 +12,13 @@ export const Styles = createGlobalStyle`
         font-family: "Motiva Sans Bold";
         src: url("/fonts/Motiva-Sans-Bold.ttf") format("truetype");
         font-style: normal;
-    }
+    } */
 
 
     body,
     html,
     a {
-        font-family: 'Motiva Sans Light', sans-serif;
+        font-family: 'Open Sauce One', sans-serif;
     }
 
 
@@ -27,6 +27,7 @@ export const Styles = createGlobalStyle`
         padding:0;
         border: 0;
         outline: 0;
+        box-sizing: border-box;
         background: #fff;
         overflow-x: hidden;
     }
@@ -57,8 +58,6 @@ export const Styles = createGlobalStyle`
     h4,
     h5,
     h6 {
-        font-family: 'Motiva Sans Bold', serif;
-        color: #18216d;
         font-size: 56px;
         line-height: 1.18;
 

@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Row, Col, Drawer } from "antd";
 import { withTranslation, TFunction } from "react-i18next";
 import Container from "../../common/Container";
-import { SvgIcon } from "../../common/SvgIcon";
 import { Button } from "../../common/Button";
 import {
   HeaderSection,
@@ -18,10 +17,30 @@ import {
 
 const Header = ({ t }: { t: TFunction }) => {
   const [visible, setVisibility] = useState(false);
+  const [background, setBackground] = useState("transparent");  
+  const [fontColor, setFontColor] = useState("#fff");  
 
   const toggleButton = () => {
     setVisibility(!visible);
   };
+
+  const handleScroll = () => {
+    const scrollY = window.scrollY || document.documentElement.scrollTop;
+    if (scrollY >= window.innerHeight) {
+      setBackground("#fff"); // Background changes to white after scrolling 10rem
+      setFontColor("black")
+    } else {
+      setBackground("transparent"); // Background remains transparent at the top
+      setFontColor("#fff"); // Background remains transparent at the top
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const MenuItem = () => {
     const scrollTo = (id: string) => {
@@ -33,21 +52,23 @@ const Header = ({ t }: { t: TFunction }) => {
     };
     return (
       <>
-        <CustomNavLinkSmall onClick={() => scrollTo("about")}>
-          <Span>{t("About")}</Span>
+        <CustomNavLinkSmall style={{ color: fontColor }} onClick={() => scrollTo("about")}>
+          <Span>{t("Quem somos")}</Span>
         </CustomNavLinkSmall>
-        <CustomNavLinkSmall onClick={() => scrollTo("mission")}>
-          <Span>{t("Mission")}</Span>
+        <CustomNavLinkSmall style={{ color: fontColor }} onClick={() => scrollTo("mission")}>
+          <Span>{t("Missão")}</Span>
         </CustomNavLinkSmall>
-        <CustomNavLinkSmall onClick={() => scrollTo("product")}>
-          <Span>{t("Product")}</Span>
+        <CustomNavLinkSmall style={{ color: fontColor }} onClick={() => scrollTo("product")}>
+          <Span>{t("Portfólio")}</Span>
         </CustomNavLinkSmall>
         <CustomNavLinkSmall
           style={{ width: "180px" }}
           onClick={() => scrollTo("contact")}
         >
           <Span>
-            <Button>{t("Contact")}</Button>
+            <Button
+            color="#ed7101"
+            >{t("Contact")}</Button>
           </Span>
         </CustomNavLinkSmall>
       </>
@@ -55,11 +76,11 @@ const Header = ({ t }: { t: TFunction }) => {
   };
 
   return (
-    <HeaderSection>
-      <Container>
+    <HeaderSection style={{ backgroundColor: background }}>
+      <Container backgroundColor="transparent">
         <Row justify="space-between">
           <LogoContainer to="/" aria-label="homepage">
-            <SvgIcon src="logo.svg" width="101px" height="64px" />
+            <img src="/img/icons/logoseriguela.png" height="40px" alt="logo"/>
           </LogoContainer>
           <NotHidden>
             <MenuItem />

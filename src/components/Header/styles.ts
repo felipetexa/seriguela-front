@@ -3,7 +3,15 @@ import { Link } from "react-router-dom";
 import { MenuOutlined } from "@ant-design/icons";
 
 export const HeaderSection = styled("header")`
-  padding: 1rem 0.5rem;
+
+position: fixed; /* Fixed position at the top */
+  top: 0;
+  left: 0;
+  width: 100%; /* Full width */
+  z-index: 1000; /* Ensure it stays on top of other content */
+  background-color: transparent; /* Default background */
+  padding: 0.5rem;
+  transition: background-color 0.3s ease-in-out; /* Smooth transition */
 
   .ant-row-space-between {
     align-items: center;
@@ -13,6 +21,7 @@ export const HeaderSection = styled("header")`
 
 export const LogoContainer = styled(Link)`
   display: flex;
+  margin-left: 5rem;
 `;
 
 export const NavLink = styled("div")`
@@ -34,7 +43,7 @@ export const CustomNavLink = styled("div")`
 `;
 
 export const Burger = styled("div")`
-  @media only screen and (max-width: 890px) {
+  @media only screen and (max-width: 1200px) {
     display: block;
   }
 
@@ -46,10 +55,11 @@ export const Burger = styled("div")`
 `;
 
 export const NotHidden = styled("div")`
-  @media only screen and (max-width: 890px) {
+  @media only screen and (max-width: 1200px) {
     display: none;
   }
 `;
+
 
 export const Menu = styled("h5")`
   font-size: 1.5rem;
@@ -59,7 +69,7 @@ export const Menu = styled("h5")`
 
 export const CustomNavLinkSmall = styled(NavLink)`
   font-size: 1.2rem;
-  color: #18216d;
+  color: #fff;
   transition: color 0.2s ease-in;
   margin: 0.5rem 2rem;
 
@@ -90,6 +100,6 @@ export const Span = styled("span")`
   &:focus {
     color: rgb(255, 130, 92);
     text-underline-position: under;
-    text-decoration: rgb(255, 130, 92) wavy underline;
+    text-decoration: rgb(255, 130, 92) underline;
   }
 `;
