@@ -25,7 +25,9 @@ const ContentBlock = ({
   t,
   id,
   direction,
-}: ContentBlockProps) => {
+  bgImage,
+  children
+}: ContentBlockProps & { children?: React.ReactNode }) => {
   const scrollTo = (id: string) => {
     const element = document.getElementById(id) as HTMLDivElement;
     element.scrollIntoView({
@@ -34,7 +36,7 @@ const ContentBlock = ({
   };
 
   return (
-    <ContentSection bgImage={"/img/bannerfundo.png"}>
+    <ContentSection bgImage={bgImage}>
       <Fade direction={direction} triggerOnce>
         <StyledRow
           justify="space-between"
@@ -42,13 +44,17 @@ const ContentBlock = ({
           id={id}
           direction={direction}
         >
+          {children ? (
+            children // If children are provided, render the custom content
+          ) : (
+        <>
           <Col lg={11} md={11} sm={12} xs={24}>
             {/* <SvgIcon src={icon} width="100%" height="100%" /> */}
           </Col>
           <Col lg={11} md={11} sm={11} xs={24}>
             <ContentWrapper>
-              <h6>{t(title)}</h6>
-              <Content>{t(content)}</Content>
+            {title && <h6>{t(title)}</h6>}
+            {content && <Content>{t(content)}</Content>}
               {direction === "right" ? (
                 <ButtonWrapper>
                   {typeof button === "object" &&
@@ -103,7 +109,8 @@ const ContentBlock = ({
               )}
             </ContentWrapper>
           </Col>
-        </StyledRow>
+          </>
+          )}</StyledRow>
       </Fade>
     </ContentSection>
   );

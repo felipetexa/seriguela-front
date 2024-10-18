@@ -19,6 +19,7 @@ const Header = ({ t }: { t: TFunction }) => {
   const [visible, setVisibility] = useState(false);
   const [background, setBackground] = useState("transparent");  
   const [fontColor, setFontColor] = useState("#fff");  
+  const [isHeaderVisible, setHeaderVisible] = useState(false);
 
   const toggleButton = () => {
     setVisibility(!visible);
@@ -26,6 +27,11 @@ const Header = ({ t }: { t: TFunction }) => {
 
   const handleScroll = () => {
     const scrollY = window.scrollY || document.documentElement.scrollTop;
+    if (scrollY > 80) {
+      setHeaderVisible(true);
+    } else {
+      setHeaderVisible(false); // Hide header when scrolled less than 5rem
+    }
     if (scrollY >= window.innerHeight) {
       setBackground("#fff"); // Background changes to white after scrolling 10rem
       setFontColor("black")
@@ -76,7 +82,7 @@ const Header = ({ t }: { t: TFunction }) => {
   };
 
   return (
-    <HeaderSection style={{ backgroundColor: background }}>
+    <HeaderSection style={{ backgroundColor: background, display: isHeaderVisible ? "block" : "none" }}>
       <Container backgroundColor="transparent">
         <Row justify="space-between">
           <LogoContainer to="/" aria-label="homepage">

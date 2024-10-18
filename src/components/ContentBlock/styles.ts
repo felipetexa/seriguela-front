@@ -4,7 +4,7 @@ import styled from "styled-components";
 export const ContentSection = styled("section")<{ bgImage?: string }>`
   position: relative;
   padding: 10rem 0 8rem;
-  background-image: url(${({ bgImage }) => bgImage});
+  background-image: ${({ bgImage }) => (bgImage ? `url(${bgImage})` : "none")};
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
